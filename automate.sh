@@ -59,8 +59,8 @@ for domain in "$@"; do
             echo "This script needs to modify /etc/hosts. Please enter your sudo password."
             sudo -v || exit 1
         fi
-        echo sudo -S bash -c "#Added by automate.sh script at $(date)" >>"$hosts_file"
-        echo sudo -S bash -c "$ip_address    $domain" >>"$hosts_file"
+        echo "#Added by automate.sh script at $(date)" | sudo tee -a "$hosts_file" >/dev/null
+        echo "$ip_address    $domain" | sudo tee -a "$hosts_file" >/dev/null
         echo "Hosts entry added to $hosts_file for domain $domain"
     fi
 done
